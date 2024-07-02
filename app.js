@@ -15,6 +15,9 @@ const KEY = process.env.API_KEY
 app.use(cors());
 app.use(express.json())
 
+app.get("/", () => {
+    res.send("Welcome to this basic web server")
+})
 app.get("/api/hello", async (req, res) => {
 
     const userIP = extractIP(req.ip)
@@ -26,6 +29,7 @@ app.get("/api/hello", async (req, res) => {
 
             const apiCall = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${KEY}&q=${userIP}&aqi=no`)
             const apiData = apiCall.data
+
             const response = {
                 "client_ip": userIP,
                 "location": apiData.location.region,
@@ -33,6 +37,7 @@ app.get("/api/hello", async (req, res) => {
             }
             
             res.status(200).json(response)
+
         }else{
 
             res.status(401).json("please provide a visitor_name as a query parameter")
