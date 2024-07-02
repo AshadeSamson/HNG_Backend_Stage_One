@@ -1,0 +1,22 @@
+{
+  "name": "hng_backend_stage_one",
+  "version": "1.0.0",
+  "description": "basic backend server",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "backend"
+  ],
+  "author": "Ashade Samson",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  }
+}
