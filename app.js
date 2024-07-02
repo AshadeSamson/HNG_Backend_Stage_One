@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import axios from "axios"
+import ip from "ip"
 import { extractIP } from "./functions/func.js"
 
 const app = express()
@@ -18,9 +19,11 @@ app.use(express.json())
 app.get("/", () => {
     res.send("Welcome to this basic web server")
 })
+
 app.get("/api/hello", async (req, res) => {
 
-    const userIP = extractIP(req.ip)
+    const getIP = await axios.get('https://api.ipify.org/?format=json')
+    const userIP = getIP.data.ip
     const userName = req.query.visitor_name
 
     try {
@@ -45,7 +48,7 @@ app.get("/api/hello", async (req, res) => {
         }
     } catch (error) {
 
-        res.status(501).json(error.message)
+        res.status(501).json(error)
         
     }
 
