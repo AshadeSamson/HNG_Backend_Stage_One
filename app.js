@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import axios from "axios"
 
 
+
 const app = express()
 dotenv.config()
 
@@ -15,7 +16,9 @@ const KEY = process.env.API_KEY
 app.use(cors());
 app.use(express.json())
 
-
+app.get("/", (req, res) => {
+    res.status(200).json("You are welcome")
+})
 app.get("/api/hello", async (req, res) => {
 
     const getIP = await axios.get('https://api.ipify.org/?format=json')
