@@ -2,8 +2,7 @@ import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import axios from "axios"
-import ip from "ip"
-import { extractIP } from "./functions/func.js"
+
 
 const app = express()
 dotenv.config()
@@ -16,9 +15,6 @@ const KEY = process.env.API_KEY
 app.use(cors());
 app.use(express.json())
 
-app.get("/", () => {
-    res.send("Welcome to this basic web server")
-})
 
 app.get("/api/hello", async (req, res) => {
 
@@ -43,12 +39,12 @@ app.get("/api/hello", async (req, res) => {
 
         }else{
 
-            res.status(401).json("please provide a visitor_name as a query parameter")
+            res.status(401).json("please provide visitor_name as a query parameter")
 
         }
     } catch (error) {
 
-        res.status(501).json(error)
+        res.status(501).json(error.message)
         
     }
 
