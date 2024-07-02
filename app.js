@@ -7,6 +7,7 @@ import axios from "axios"
 
 const app = express()
 dotenv.config()
+app.set("trust proxy", true)
 
 
 const PORT = process.env.PORT
@@ -19,11 +20,12 @@ app.use(express.json())
 app.get("/", (req, res) => {
     res.status(200).json("You are welcome")
 })
+
 app.get("/api/hello", async (req, res) => {
 
-    const getIP = await axios.get('https://api.ipify.org/?format=json')
-    const userIP = getIP.data.ip
+    const userIP = req.headers["x-forwarded-for"] || req.socket.remoteAddress
     const userName = req.query.visitor_name
+
 
     try {
 
@@ -47,7 +49,7 @@ app.get("/api/hello", async (req, res) => {
         }
     } catch (error) {
 
-        res.status(501).json(error.message)
+        res.status(501).json(error)
         
     }
 
