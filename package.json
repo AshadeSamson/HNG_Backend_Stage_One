@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "npm run build",
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "keywords": [
     "backend"
